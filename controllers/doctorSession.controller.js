@@ -28,38 +28,20 @@ exports.create = (req, res) => {
 };
 
 // Retrieve all Sessions with matching doctor ID from the database.
-exports.findAll = (req, res) => {
-    const doctorID = req.query.doctorID;
-    console.log(doctorID);
-    let condition = doctorID ? { doctor_id: doctorID } : {};
-        Session.find(condition)
+exports.findAllByDoctorID = (req, res) => {
+    const doctorID = req.params.id;
+console.log(req.params);
+        Session.find({ doctor_id: doctorID })
         .then(data => {
             res.send(data);
+            console.log(data);
         })
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while retrieving tutorials."
+                    err.message || "Some error occurred while retrieving sessions."
             });
         });
-};
-
-// Find a single Session with an id
-exports.findOne = (req, res) => {
-    const id = req.params.id;
-
-    Session.findOne(id)
-        .then(data =>{
-            if(!data) {
-                res.send({message: "Session with id " + id + " was not found"})
-            }
-            else {
-                res.send(data);
-            }
-        })
-        .catch(err => {
-            res.status(500).send({message: "Error occurred while retrieving the session with id" + id});
-        })
 };
 
 // Update a Session by the id in the request

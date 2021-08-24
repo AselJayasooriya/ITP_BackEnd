@@ -6,11 +6,8 @@ module.exports = app => {
     // Create a new Session
     router.post("/", sessions.create);
 
-    // Retrieve all Sessions
-    router.get("/", sessions.findAll);
-
-    // Retrieve a single Session with id
-    router.get("/:id", sessions.findOne);
+    // Retrieve all Sessions with given Doctor ID
+    router.get("/:id", sessions.findAllByDoctorID);
 
     // Update a Session with id
     router.put("/:id", sessions.update);

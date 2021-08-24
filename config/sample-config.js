@@ -1,0 +1,1 @@
+// Please add the config file to git ignore. publishing our mongo db url to github is not safe

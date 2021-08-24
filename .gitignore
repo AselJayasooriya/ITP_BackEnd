@@ -118,4 +118,4 @@ dist
 .pnp.*
 
 #IDE Configs
-.idea
+.idea!/config/db.config.js
