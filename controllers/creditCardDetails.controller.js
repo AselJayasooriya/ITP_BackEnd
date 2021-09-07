@@ -45,11 +45,11 @@ exports.findAllByDPaymentID = (req, res) => {
     });
 };
 
-// Update a Session by the id in the request
-exports.update = (req, res) => {};
-
-// Delete a Session with the specified id in the request
-exports.delete = (req, res) => {};
-
-// Delete all Sessions from the database.
-exports.deleteAll = (req, res) => {};
+// // Update a Session by the id in the request
+// exports.update = (req, res) => {};
+//
+// // Delete a Session with the specified id in the request
+// exports.delete = (req, res) => {};
+//
+// // Delete all Sessions from the database.
+// exports.deleteAll = (req, res) => {};
