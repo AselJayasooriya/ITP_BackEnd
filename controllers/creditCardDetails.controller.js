@@ -7,11 +7,11 @@ exports.create = (req, res) => {
   console.log(req.body);
 
   const credit = new Credit({
-    payment_id: req.body.paymentID,
+    // payment_id: req.body.paymentID,
     name: req.body.name,
     email: req.body.email,
-    date: req.body.date,
-    amount: req.body.amount,
+    // date: req.body.date,
+    // amount: req.body.amount,
   });
   credit
     .save(credit)
