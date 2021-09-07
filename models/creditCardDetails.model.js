@@ -1,6 +1,6 @@
 module.exports = (mongoose) => {
   const Credit = mongoose.model(
-    "creditCardPayments",
+    "creditCardPayment",
     mongoose.Schema(
       {
         payment_id: Number,

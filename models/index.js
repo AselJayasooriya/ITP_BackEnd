@@ -7,5 +7,6 @@ const db = {};
     db.mongoose = mongoose;
     db.url = dbConfig.url;
     db.sessions = require("./doctorSession.model")(mongoose);
+db.creditCardPayments = require("./creditCardDetails.model")(mongoose);
 
 module.exports = db;
