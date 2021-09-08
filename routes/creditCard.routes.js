@@ -1,10 +1,10 @@
-module.exports = app => {
+module.exports = (app) => {
   const credit = require("../controllers/creditCardDetails.controller");
   let router = require("express").Router();
 
   // Create a new creditcard
   router.post("/", credit.create);
-
+  router.get("/info", credit.findAll);
   // Retrieve all info with givenpayment ID
   router.get("/:id", credit.findAllByDPaymentID);
 

@@ -7,11 +7,11 @@ exports.create = (req, res) => {
   console.log(req.body);
 
   const credit = new Credit({
-    // payment_id: req.body.paymentID,
+    payment_id: req.body.paymentid,
     name: req.body.name,
     email: req.body.email,
-    // date: req.body.date,
-    // amount: req.body.amount,
+    date: req.body.date,
+    amount: req.body.amount,
   });
   credit
     .save(credit)
@@ -28,13 +28,24 @@ exports.create = (req, res) => {
     });
 };
 
+exports.findAll = (req, res) => {
+  Credit.find()
+    .then((data) => {
+      res.json(data);
+      console.log(data);
+    })
+    .catch((err) => {
+      alert(err);
+    });
+};
+
 // Retrieve all Sessions with matching Payment ID from the database.
 exports.findAllByDPaymentID = (req, res) => {
   const paymentID = req.params.id;
   console.log(req.params);
-  Session.find({ payment_id: paymentID })
+  Credit.find({ payment_id: paymentID })
     .then((data) => {
-      res.send(data);
+      res.send("retruned with id" + data);
       console.log(data);
     })
     .catch((err) => {

@@ -3,11 +3,11 @@ module.exports = (mongoose) => {
     "creditCardPayment",
     mongoose.Schema(
       {
-        payment_id: Number,
+        payment_id: String,
         name: String,
         email: String,
         date: String,
-        amount: Number,
+        amount: String,
       },
       { timestamps: true }
     )
