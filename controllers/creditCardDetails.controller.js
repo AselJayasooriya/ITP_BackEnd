@@ -43,7 +43,7 @@ exports.findAll = (req, res) => {
 exports.findAllByDPaymentID = (req, res) => {
   const paymentID = req.params.id;
   console.log(req.params);
-  Credit.find({ payment_id: paymentID })
+  Credit.find({ _id: paymentID })
     .then((data) => {
       res.send("retruned with id" + data);
       console.log(data);
