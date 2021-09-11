@@ -7,5 +7,6 @@ const db = {};
     db.mongoose = mongoose;
     db.url = dbConfig.url;
     db.sessions = require("./doctorSession.model")(mongoose);
+    db.tets = require("./tests.model.js")(mongoose);
 
 module.exports = db;
