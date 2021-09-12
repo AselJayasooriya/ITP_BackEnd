@@ -22,6 +22,9 @@ module.exports = app => {
     //retrive a single test when specimen id and contact number correct
     router.get("/client", tests.client);
 
+    //// Update a test with id
+    router.put("/:id", tests.update);
+
     app.use('/api/tests', router);
 
 };

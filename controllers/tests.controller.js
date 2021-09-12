@@ -86,18 +86,49 @@ exports.findAllStarted = (req, res) => {
 //retrive a single test when specimen id and contact number correct
 exports.client = (req, res) => {
     console.log(req.query)
-    const contactnumber= req.query.contactnumber;
-    const specimenid= req.query.specimenid;
-    console.log(contactnumber,specimenid)
-    Tests.find({ contactnumber: contactnumber, specimenid:specimenid })
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving tutorials."
-      });
-    });
+    const contactnumber = req.query.contactnumber;
+    const specimenid = req.query.specimenid;
+    console.log(contactnumber, specimenid)
+    Tests.find({ contactnumber: contactnumber, specimenid: specimenid })
+        .then(data => {
+            if (data) {
+                res.send(data);
+            }
+            else {
+                response.status(404).end()
+            }
+
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving tests."
+            });
+        });
 }
+
+//update a test by id
+exports.update = (req, res) => {
+    if (!req.body) {
+        return res.status(400).send({
+            message: "Data to update can not be empty!"
+        });
+    }
+
+    const id = req.params.id;
+
+    Tests.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+        .then(data => {
+            if (!data) {
+                res.status(404).send({
+                    message: `Cannot update test with id=${id}. Maybe test was not found!`
+                });
+            } else res.send({ message: "Test was updated successfully." });
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Error updating Tutorial with id=" + id
+            });
+        });
+};
 
