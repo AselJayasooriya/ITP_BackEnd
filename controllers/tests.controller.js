@@ -9,17 +9,17 @@ exports.create = (req, res) => {
         specimenid: req.body.specimenid,
         subbmitteddate: new Date,
         starteddate: req.body.starteddate,
-        completeddate:req.body.completeddate,
-        status:"subbmitted",
-        contactnumber:req.body.contactnumber,
-        patientsname:req.body.patientsname,
-        dateofbirth:req.body.dateofbirth,
-        testtype:req.body.testtype,
-        collectedperson:req.body.collectedperson,
-        inchargelabass:req.body.inchargelabass,
-        inchargelabassid:req.body.inchargelabassid,
-        specimenproperty:req.body.specimenproperty,
-        specimenpropertyresult:req.body.specimenpropertyresult,
+        completeddate: req.body.completeddate,
+        status: "completed",
+        contactnumber: req.body.contactnumber,
+        patientsname: req.body.patientsname,
+        dateofbirth: req.body.dateofbirth,
+        testtype: req.body.testtype,
+        collectedperson: req.body.collectedperson,
+        inchargelabass: req.body.inchargelabass,
+        inchargelabassid: req.body.inchargelabassid,
+        specimenproperty: req.body.specimenproperty,
+        specimenpropertyresult: req.body.specimenpropertyresult,
     });
     test
         .save(test)
@@ -35,40 +35,26 @@ exports.create = (req, res) => {
 
 
 };
-
 // Retrieve all patients details in tests from the database.
-exports.findAll = (req, res) => {
-
+exports.getAll = (req, res) => {
+    Tests.find()
+        .then((data) => {
+            res.json(data);
+            console.log(data);
+        })
+        .catch((err) => {
+            alert(err);
+        });
 };
 
-// Find a single test with an id
-exports.findOne = (req, res) => {
-
-};
-
-// Update a test by the id in the request
-exports.update = (req, res) => {
-
-};
-
-// Delete a test with the specified id in the request
-exports.delete = (req, res) => {
-
-};
-
-
-
-// Find all comleted tests
-exports.findAllCompleted = (req, res) => {
-
-};
-
-// Find all subbmitted tests
+//Retrieve all subbmitted tesrts from the database
 exports.findAllSubbmitted = (req, res) => {
-
-};
-
-// Find all comleted tests
-exports.findAllCompleted = (req, res) => {
-
+    Tests.find({status:"subbmitted"})
+        .then((data) => {
+            res.json(data);
+            console.log(data);
+        })
+        .catch((err) => {
+            alert(err);
+        });
 };
