@@ -83,7 +83,7 @@ exports.delete = (req, res) => {
         .then(data => {
             if (!data) {
                 res.status(404).send({
-                    message: `Cannot delete Prescription with id=${id}. Maybe Tutorial was not found!`
+                    message: `Cannot delete Prescription with id=${id}. Maybe Prescription was not found!`
                 });
             } else {
                 res.send({
