@@ -52,7 +52,27 @@ exports.findOne = (req, res) => {
 
 // Update a Prescription by the id in the request
 exports.update = (req, res) => {
+    if (!req.body) {
+        return res.status(400).send({
+            message: "Data to update can not be empty!"
+        });
+    }
 
+    const id = req.params.id; //change it to dPName if errors occur
+
+    Prescription.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+        .then(data => {
+            if (!data) {
+                res.status(404).send({
+                    message: `Cannot update Prescription of ${id}. Maybe prescription was not found!`
+                });
+            } else res.send({ message: "Prescription was updated successfully." });
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Error updating Prescription with id=" + id
+            });
+        });
 };
 
 // Delete a Prescription with the specified id in the request

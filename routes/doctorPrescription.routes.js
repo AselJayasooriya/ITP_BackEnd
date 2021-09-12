@@ -9,5 +9,11 @@ module.exports = app => {
     //read all prescriptions of a given doctor ID
     router.get("/:id", prescriptions.findAll);
 
+    //update the prescription of given patient name
+    router.put("/:id",prescriptions.update);
+
+    //delete a prescription of given id
+    router.delete("/:id", prescriptions.delete);
+
     app.use('/api/prescriptions', router);
 };
