@@ -4,15 +4,17 @@ module.exports = (app) => {
 
   // Create a new creditcard
   router.post("/", credit.create);
+
   router.get("/info", credit.findAll);
+
   // Retrieve all info with givenpayment ID
   router.get("/:id", credit.findAllByDPaymentID);
 
   // Update a Session with id
   // router.put("/:id", credit.update);
   //
-  // // // Delete a Session with id
-  // // router.delete("/:id", credit.delete);
+  // Delete a Creditcard with id
+  router.delete("/:id", credit.delete);
   // //
   // // // Delete all Sessions
   // // router.delete("/", credit.deleteAlll);

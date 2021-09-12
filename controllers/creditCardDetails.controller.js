@@ -60,9 +60,31 @@ exports.findAllByDPaymentID = (req, res) => {
 // exports.update = (req, res) => {};
 //
 // Delete a Session with the specified id in the request
-exports.delete = (req, res) => {
-  console.log("delete method executed");
-};
-//
+
+// exports.delete(async (req, res) => {
+//   console.log("delete method executed");
+//   let Id = req.params.id;
+//   await Credit.findOneAndDelete(Id)
+//     .then(() => {
+//       res.status(200).send({ status: "user deleted" });
+//     })
+//     .catch((e) => {
+//       console.log(e);
+//       res.status(400).send({ status: "error in delete operation" });
+//     });
+// });
 // // Delete all Sessions from the database.
 // exports.deleteAll = (req, res) => {};
+
+exports.delete = async (req, res) => {
+  console.log("delete method executed");
+  let Id = req.params.id;
+  await Credit.findOneAndDelete({ _id: Id })
+    .then(() => {
+      res.status(200).send({ status: "user deleted" });
+    })
+    .catch((e) => {
+      console.log(e);
+      res.status(400).send({ status: "error in delete operation" });
+    });
+};
