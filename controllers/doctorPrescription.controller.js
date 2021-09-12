@@ -64,7 +64,7 @@ exports.update = (req, res) => {
         .then(data => {
             if (!data) {
                 res.status(404).send({
-                    message: `Cannot update Prescription of ${id}. Maybe prescription was not found!`
+                    message: `Cannot update Prescription of id = ${id}. Maybe prescription was not found!`
                 });
             } else res.send({ message: "Prescription was updated successfully." });
         })
@@ -77,6 +77,25 @@ exports.update = (req, res) => {
 
 // Delete a Prescription with the specified id in the request
 exports.delete = (req, res) => {
+    const id = req.params.id;
+
+    Prescription.findByIdAndRemove(id)
+        .then(data => {
+            if (!data) {
+                res.status(404).send({
+                    message: `Cannot delete Prescription with id=${id}. Maybe Tutorial was not found!`
+                });
+            } else {
+                res.send({
+                    message: "Prescription was deleted successfully!"
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Could not delete Prescription with id=" + id
+            });
+        });
 
 };
 
