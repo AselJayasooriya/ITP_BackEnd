@@ -6,5 +6,8 @@ module.exports = app => {
     // Create a new Prescription
     router.post("/", prescriptions.create);
 
+    //read all prescriptions of a given doctor ID
+    router.get("/:id", prescriptions.findAll);
+
     app.use('/api/prescriptions', router);
 };

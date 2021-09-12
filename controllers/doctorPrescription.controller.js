@@ -30,7 +30,19 @@ exports.create = (req, res) => {
 
 // Retrieve all Prescriptions of a given id from the database.
 exports.findAll = (req, res) => {
+    const doctorID = req.params.id;
 
+    Prescription.find({ dId: doctorID })
+        .then(data => {
+            res.send(data);
+
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving the prescriptions."
+            });
+        });
 };
 
 // Find a single Prescription with an id
