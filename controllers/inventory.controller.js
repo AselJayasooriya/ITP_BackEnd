@@ -30,9 +30,16 @@ exports.create = (req, res) => {
         });
 };
 
-// Retrieve all from the database.
-exports.findAll = (req, res) => {
-
+// Retrieve all Inventories from the database.
+exports.getAll = (req, res) => {
+    Inventory.find()
+        .then((data) => {
+            res.json(data);
+            console.log(data);
+        })
+        .catch((err) => {
+            alert(err);
+        });
 };
 
 // Find a single  with an id
@@ -45,7 +52,7 @@ exports.update = (req, res) => {
 
 };
 
-// Delete a  with the specified id in the request
+// Delete an Inventory  with the specified itemId in the request
 exports.delete = (req, res) => {
 
 };
