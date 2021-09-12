@@ -6,14 +6,14 @@ exports.create = (req, res) => {
     console.log(req.body);
 
     const inventory = new Inventory({
-        item_id: req.body.itemId,
-        item_name: req.body.itemName,
-        supplier_name: req.body.supplierName,
-        supplier_email: req.body.supplierEmail,
-        supplier_contact: req.body.supplierContact,
-        purchase_price: req.body.purchasePrice,
-        registered_date: req.body.registeredDate,
-        type_medicine: req.body.typeMedicine
+        item_id: req.body.item_id,
+        item_name: req.body.item_name,
+        supplier_name: req.body.supplier_name,
+        supplier_email: req.body.supplier_email,
+        supplier_contact: req.body.supplier_contact,
+        purchase_price: req.body.purchase_price,
+        registered_date: req.body.registered_date,
+        type_medicine: req.body.type_medicine
     });
 
     //Save Inventory Item in the database
@@ -42,27 +42,54 @@ exports.getAll = (req, res) => {
         });
 };
 
-// Find a single  with an id
-exports.findOne = (req, res) => {
 
-};
-
-// Update a  by the id in the request
+// Update an Inventory by the id in the request
 exports.update = (req, res) => {
+    if (!req.body) {
+        return res.status(400).send({
+            message: "Data to update can not be empty!"
+        });
+    }
 
+    const id = req.params.id;
+
+    Inventory.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+        .then(data => {
+            if (!data) {
+                res.status(404).send({
+                    message: `Cannot update Inventory with id=${id}. Maybe Inventory was not found!`
+                });
+            } else res.send({ message: "Inventory was updated successfully." });
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Error updating Inventory with id=" + id
+            });
+        });
 };
 
 // Delete an Inventory  with the specified itemId in the request
 exports.delete = (req, res) => {
+    const id = req.params.id;
 
+    Inventory.findByIdAndRemove(id)
+        .then(data => {
+            if (!data) {
+                res.status(404).send({
+                    message: `Cannot delete Inventory with id=${id}. Maybe Inventory was not found!`
+                });
+            } else {
+                res.send({
+                    message: "Inventory was deleted successfully!"
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Could not delete Inventory with id=" + id
+            });
+        });
 };
 
-// Delete all s from the database.
-exports.deleteAll = (req, res) => {
 
-};
 
-// Find all published 
-exports.findAllPublished = (req, res) => {
-
-};
