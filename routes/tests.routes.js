@@ -4,25 +4,23 @@ module.exports = app => {
     let router = require("express").Router();
 
 
-    // Retrieve all Sessions with given Doctor ID
+    // Retrieve all subbmitted tests
     router.get("/subbmitted", tests.findAllSubbmitted);
 
-    // Retrieve all Sessions with given Doctor ID
+    // Retrieve all compleetd tests
     router.get("/completed", tests.findAllCompleted);
 
-    // Retrieve all Sessions with given Doctor ID
+    // Retrieve all started tests
     router.get("/started", tests.findAllStarted);
 
-    // Create a new Session
+    // Create a new tests
     router.post("/", tests.create);
 
     //geta all test details
     router.get("/", tests.getAll);
 
-    
-
-
-
+    //retrive a single test when specimen id and contact number correct
+    router.get("/client", tests.client);
 
     app.use('/api/tests', router);
 

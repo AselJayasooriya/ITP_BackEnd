@@ -10,7 +10,7 @@ exports.create = (req, res) => {
         subbmitteddate: new Date(),
         starteddate: req.body.starteddate,
         completeddate: req.body.completeddate,
-        status: "submitted",
+        status: "subbmitted",
         contactnumber: req.body.contactnumber,
         patientsname: req.body.patientsname,
         dateofbirth: req.body.dateofbirth,
@@ -49,7 +49,7 @@ exports.getAll = (req, res) => {
 
 //Retrieve all subbmitted tesrts from the database
 exports.findAllSubbmitted = (req, res) => {
-    Tests.find({status:"subbmitted"})
+    Tests.find({ status: "subbmitted" })
         .then((data) => {
             res.json(data);
             console.log(data);
@@ -61,7 +61,7 @@ exports.findAllSubbmitted = (req, res) => {
 
 //Retrieve all completd tests from the database
 exports.findAllCompleted = (req, res) => {
-    Tests.find({status:"completed"})
+    Tests.find({ status: "completed" })
         .then((data) => {
             res.json(data);
             console.log(data);
@@ -73,7 +73,7 @@ exports.findAllCompleted = (req, res) => {
 
 //Retrieve all started tests from the database
 exports.findAllStarted = (req, res) => {
-    Tests.find({status:"started"})
+    Tests.find({ status: "started" })
         .then((data) => {
             res.json(data);
             console.log(data);
@@ -82,3 +82,22 @@ exports.findAllStarted = (req, res) => {
             alert(err);
         });
 };
+
+//retrive a single test when specimen id and contact number correct
+exports.client = (req, res) => {
+    console.log(req.query)
+    const contactnumber= req.query.contactnumber;
+    const specimenid= req.query.specimenid;
+    console.log(contactnumber,specimenid)
+    Tests.find({ contactnumber: contactnumber, specimenid:specimenid })
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving tutorials."
+      });
+    });
+}
+
