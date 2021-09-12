@@ -26,8 +26,15 @@ exports.create = (req, res) => {
 };
 
 // Retrieve all Notes from the database.
-exports.findAll = (req, res) => {
-
+exports.getAll = (req, res) => {
+    Note.find()
+        .then((data) => {
+            res.json(data);
+            console.log(data);
+        })
+        .catch((err) => {
+            alert(err);
+        });
 };
 
 // Find a single Note with an id

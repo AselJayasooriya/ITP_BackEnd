@@ -6,6 +6,9 @@ module.exports = app => {
     // Create a new Tutorial
     router.post("/", notes.create);
 
+    // Get all the posted notes by doctors
+    router.get("/", notes.getAll);
+
     app.use('/api/notes', router);
 
 };
