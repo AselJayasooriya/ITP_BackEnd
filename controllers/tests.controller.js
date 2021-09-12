@@ -93,10 +93,8 @@ exports.client = (req, res) => {
         .then(data => {
             if (data) {
                 res.send(data);
-            }
-            else {
-                response.status(404).end()
-            }
+            }else res.send({ message: "Thre are no tests regarding to those credentials." });
+            
 
         })
         .catch(err => {
@@ -132,3 +130,25 @@ exports.update = (req, res) => {
         });
 };
 
+// Delete a test with id
+exports.delete = (req, res) => {
+    const id = req.params.id;
+
+    Tests.findByIdAndRemove(id)
+        .then(data => {
+            if (!data) {
+                res.status(404).send({
+                    message: `Cannot delete Tests with id=${id}. Maybe Tests was not found!`
+                });
+            } else {
+                res.send({
+                    message: "Test was deleted successfully!"
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Could not delete test with id=" + id
+            });
+        });
+};
