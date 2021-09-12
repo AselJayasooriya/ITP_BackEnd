@@ -7,10 +7,10 @@ exports.create = (req, res) => {
 
     const test = new Tests({
         specimenid: req.body.specimenid,
-        subbmitteddate: new Date,
+        subbmitteddate: new Date(),
         starteddate: req.body.starteddate,
         completeddate: req.body.completeddate,
-        status: "completed",
+        status: "submitted",
         contactnumber: req.body.contactnumber,
         patientsname: req.body.patientsname,
         dateofbirth: req.body.dateofbirth,
@@ -50,6 +50,30 @@ exports.getAll = (req, res) => {
 //Retrieve all subbmitted tesrts from the database
 exports.findAllSubbmitted = (req, res) => {
     Tests.find({status:"subbmitted"})
+        .then((data) => {
+            res.json(data);
+            console.log(data);
+        })
+        .catch((err) => {
+            alert(err);
+        });
+};
+
+//Retrieve all completd tests from the database
+exports.findAllCompleted = (req, res) => {
+    Tests.find({status:"completed"})
+        .then((data) => {
+            res.json(data);
+            console.log(data);
+        })
+        .catch((err) => {
+            alert(err);
+        });
+};
+
+//Retrieve all started tests from the database
+exports.findAllStarted = (req, res) => {
+    Tests.find({status:"started"})
         .then((data) => {
             res.json(data);
             console.log(data);
