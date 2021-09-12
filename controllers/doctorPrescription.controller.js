@@ -45,11 +45,6 @@ exports.findAll = (req, res) => {
         });
 };
 
-// Find a single Prescription with an id
-exports.findOne = (req, res) => {
-
-};
-
 // Update a Prescription by the id in the request
 exports.update = (req, res) => {
     if (!req.body) {
@@ -96,15 +91,5 @@ exports.delete = (req, res) => {
                 message: "Could not delete Prescription with id=" + id
             });
         });
-
-};
-
-// Delete all Prescriptions from the database.
-exports.deleteAll = (req, res) => {
-
-};
-
-// Find all published Prescription
-exports.findAllPublished = (req, res) => {
 
 };
