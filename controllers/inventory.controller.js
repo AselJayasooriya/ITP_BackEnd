@@ -6,14 +6,14 @@ exports.create = (req, res) => {
     console.log(req.body);
 
     const inventory = new Inventory({
-        item_id:req.body.item_id,
-          item_name:req.body.item_name ,
-          supplier_name: req.body.supplier_name,
-          supplier_email: req.body.supplier_email,
-          supplier_contact: req.body.supplier_contact,
-          purchase_price: req.body.purchase_price,
-          registered_date: req.body.registered_date,
-          type_medicine: req.body.type_medicine
+        item_id: req.body.itemId,
+        item_name: req.body.itemName,
+        supplier_name: req.body.supplierName,
+        supplier_email: req.body.supplierEmail,
+        supplier_contact: req.body.supplierContact,
+        purchase_price: req.body.purchasePrice,
+        registered_date: req.body.registeredDate,
+        type_medicine: req.body.typeMedicine
     });
 
     //Save Inventory Item in the database
@@ -22,40 +22,40 @@ exports.create = (req, res) => {
         .then(data => {
             res.send(data);
         })
-        .catch(err =>{
+        .catch(err => {
             res.status(500).send({
                 message:
-                err.message || "Some error occurred while creating the Inventory Item."
+                    err.message || "Some error occurred while creating the Inventory Item. Try Again!!"
             });
         });
 };
 
-// Retrieve all Tutorials from the database.
+// Retrieve all from the database.
 exports.findAll = (req, res) => {
-  
+
 };
 
-// Find a single Tutorial with an id
+// Find a single  with an id
 exports.findOne = (req, res) => {
-  
+
 };
 
-// Update a Tutorial by the id in the request
+// Update a  by the id in the request
 exports.update = (req, res) => {
-  
+
 };
 
-// Delete a Tutorial with the specified id in the request
+// Delete a  with the specified id in the request
 exports.delete = (req, res) => {
-  
+
 };
 
-// Delete all Tutorials from the database.
+// Delete all s from the database.
 exports.deleteAll = (req, res) => {
-  
+
 };
 
-// Find all published Tutorials
+// Find all published 
 exports.findAllPublished = (req, res) => {
-  
+
 };
