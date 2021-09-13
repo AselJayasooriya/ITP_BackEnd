@@ -3,9 +3,18 @@ module.exports = mongoose => {
         "note",
         mongoose.Schema(
             {
-                pNoteId: Number,
-                pNoteName: String,
-                pNoteMessage: String,
+                pNoteId: {
+                    type: Number,
+                    required: true
+                },
+                pNoteName: {
+                    type: String,
+                    required: true
+                },
+                pNoteMessage: {
+                    type: String,
+                    required: true
+                }
             },
             { timestamps: true }
         )

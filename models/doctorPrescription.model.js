@@ -3,11 +3,26 @@ module.exports = mongoose => {
         "prescription",
         mongoose.Schema(
             {
-                dId: String,
-                dPName: String,
-                dPDignosis: String,
-                dMed1: String,
-                dDose1: String,
+                dId: {
+                    type: String,
+                    required: true
+                },
+                dPName: {
+                    type: String,
+                    required: true
+                },
+                dPDignosis: {
+                    type: String,
+                    required: true
+                },
+                dMed1: {
+                    type: String,
+                    required: true
+                },
+                dDose1: {
+                    type: String,
+                    required: true
+                },
                 dMed2: String,
                 dDose2: String
             },
