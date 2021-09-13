@@ -36,11 +36,8 @@ app.get("/", (req, res) => {
 });
 
 require("./routes/doctorSession.routes")(app);
-<<<<<<< HEAD
 require("./routes/creditCard.routes")(app);
-=======
 require("./routes/inventory.routes")(app);
->>>>>>> ee8645cfb5a081a4dd3467c9a7a5f2b2e11588cc
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
