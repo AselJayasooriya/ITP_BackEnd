@@ -7,6 +7,7 @@ module.exports = mongoose => {
                 date: String,
                 time: String,
                 maxAppointments:Number,
+                currentAppointments:Number,
             },
             { timestamps: true }
         )
