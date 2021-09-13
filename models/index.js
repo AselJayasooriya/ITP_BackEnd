@@ -7,5 +7,7 @@ const db = {};
     db.mongoose = mongoose;
     db.url = dbConfig.url;
     db.sessions = require("./doctorSession.model")(mongoose);
+    db.empforms = require("./employeeDetails.model")(mongoose);
+    db.passwords = require("./staffPwd.model")(mongoose);
 
 module.exports = db;
