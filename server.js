@@ -3,6 +3,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 
 const app = express();
+
 const corsOptions = {
   origin: "*",
 };
@@ -35,7 +36,10 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to ispirithalei." });
 });
 
+
 require("./routes/doctorSession.routes")(app);
+require("./routes/employeeDetails.routes")(app);
+require("./routes/staffPwd.routes")(app);
 require("./routes/creditCard.routes")(app);
 require("./routes/inventory.routes")(app);
 
