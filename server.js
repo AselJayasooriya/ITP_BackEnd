@@ -38,6 +38,8 @@ app.get("/", (req, res) => {
 
 
 require("./routes/doctorSession.routes")(app);
+require("./routes/doctorNote.routes")(app);
+require("./routes/doctorPrescription.routes")(app);
 require("./routes/tests.routes")(app);
 require("./routes/employeeDetails.routes")(app);
 require("./routes/staffPwd.routes")(app);
