@@ -133,22 +133,39 @@ exports.update = (req, res) => {
 // Delete a test with id
 exports.delete = (req, res) => {
     const id = req.params.id;
-
+  
     Tests.findByIdAndRemove(id)
-        .then(data => {
-            if (!data) {
-                res.status(404).send({
-                    message: `Cannot delete Tests with id=${id}. Maybe Tests was not found!`
-                });
-            } else {
-                res.send({
-                    message: "Test was deleted successfully!"
-                });
-            }
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Could not delete test with id=" + id
-            });
+      .then(data => {
+        if (!data) {
+          res.status(404).send({
+            message: `Cannot delete Tests with id=${id}. Maybe Test was not found!`
+          });
+        } else {
+          res.send({
+            message: "Test was deleted successfully!"
+          });
+        }
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: "Could not delete Test with id=" + id
         });
-};
+      });
+  };
+
+// Find a single test with an id
+exports.findOne = (req, res) => {
+    const id = req.params.id;
+  
+    Tests.findById(id)
+      .then(data => {
+        if (!data)
+          res.status(404).send({ message: "Not found test with id " + id });
+        else res.send(data);
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .send({ message: "Error retrieving test with id=" + id });
+      });
+  };
