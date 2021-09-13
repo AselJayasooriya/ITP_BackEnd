@@ -3,11 +3,11 @@ module.exports = mongoose => {
         "inventory",
         mongoose.Schema(
             {
-                item_id: String,
+                item_id: {type:String,required:true},
                 item_name: String,
                 supplier_name: String,
-                supplier_email: String,
-                supplier_contact: String,
+                supplier_email: {type:String,required:true},
+                supplier_contact: {type:String,required:true},
                 purchase_price: Number,
                 registered_date: String,
                 type_medicine: String
