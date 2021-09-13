@@ -4,13 +4,16 @@ const bodyParser = require("body-parser")
 
 const app = express();
 const corsOptions = {
-    origin: "*"
+    origin:"*"
 };
 
 app.use(cors(corsOptions));
 
 // parse requests of content-type - application/json
 app.use(express.json());
+
+// parse requests of content-type - application/json
+app.use(bodyParser.json());
 
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
@@ -38,7 +41,9 @@ app.get("/", (req, res) => {
     res.json({ message: "Welcome to ispirithalei." });
 });
 
-require("./routes/doctorSession.routes")(app);
+require("./routes/doctorSession.routes")(app);  
+require("./routes/echannelling.routes")(app);
+require("./routes/postInquiry.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
