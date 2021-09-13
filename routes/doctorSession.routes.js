@@ -9,14 +9,14 @@ module.exports = app => {
     // Retrieve all Sessions with given Doctor ID
     router.get("/:id", sessions.findAllByDoctorID);
 
-    // Update a Session with id
-    router.put("/:id", sessions.update);
+    // // Update a Session with id
+    // router.put("/:id", sessions.update);
 
     // Delete a Session with id
     router.delete("/:id", sessions.delete);
 
-    // Delete all Sessions
-    router.delete("/", sessions.deleteAll);
+    // // Delete all Sessions
+    // router.delete("/", sessions.deleteAll);
 
     app.use('/api/sessions', router);
 };
