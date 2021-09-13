@@ -69,7 +69,7 @@ exports.getAll = (req, res) => {
   EmpDetails.find()
     .then((data) => {
       res.json(data);
-      console.log(data);
+      
     })
     .catch((err) => {
       alert(err);
@@ -103,23 +103,18 @@ exports.update = (req, res) => {
 
 // Delete an empform  with the specified Id in the request
 exports.delete = (req, res) => {
-  const id = req.params.id;
-
-  EmpDetails.findByIdAndRemove(id)
-    .then((data) => {
-      if (!data) {
-        res.status(404).send({
-          message: `Cannot delete Emp details with id=${id}. Maybe Emp details was not found!`,
-        });
-      } else {
-        res.send({
-          message: "Emp details was deleted successfully!",
-        });
-      }
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: "Could not delete Emp details with id=" + id,
+  const ID = req.params.id;
+  console.log(ID);
+  EmpDetails.deleteOne({ _id: ID })
+      .then(response => {
+          res.send(response);
+          console.log(response);
+          console.log("deleted")
+      })
+      .catch(err => {
+          res.status(500).send({
+              message:
+                  err.message || "Error occured couldn't delete item."
+          });
       });
-    });
 };
