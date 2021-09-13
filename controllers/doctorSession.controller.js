@@ -18,7 +18,7 @@ exports.create = (req, res) => {
         })
         .catch(err => {
             res.status(500).send({
-                message: err.message || "Some error occured while creating your session please try again."
+                message: err.message || "Error occured while creating your session please try again."
             });
         });
 
