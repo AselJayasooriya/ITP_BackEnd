@@ -11,5 +11,6 @@ db.creditCardPayments = require("./creditCardDetails.model")(mongoose);
 db.inventory = require("./inventory.model")(mongoose);
 db.empforms = require("./employeeDetails.model")(mongoose);
 db.passwords = require("./staffPwd.model")(mongoose);
+db.tests = require("./tests.model.js")(mongoose);
 
 module.exports = db;
