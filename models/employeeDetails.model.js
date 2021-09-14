@@ -1,6 +1,6 @@
 module.exports = (mongoose) => {
   const EmpDetails = mongoose.model(
-    "empform",
+    "employees",
     mongoose.Schema(
       {
         role: String,
@@ -9,6 +9,7 @@ module.exports = (mongoose) => {
         email: String,
         mobile: Number,
         address: String,
+        password: String
       },
       { timestamps: true }
     )

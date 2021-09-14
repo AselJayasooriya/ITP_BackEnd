@@ -1,5 +1,5 @@
 const db = require("../models");
-const EmpDetails = db.empforms;
+const EmpDetails = db.employees;
 
 // Create and Save a new empform
 
@@ -16,6 +16,8 @@ exports.create = (req, res) => {
     email: req.body.email,
     mobile: req.body.mobile,
     address: req.body.address,
+    password: req.body.password,
+    
   });
 
   empform

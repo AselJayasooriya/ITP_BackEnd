@@ -42,9 +42,9 @@ require("./routes/doctorNote.routes")(app);
 require("./routes/doctorPrescription.routes")(app);
 require("./routes/tests.routes")(app);
 require("./routes/employeeDetails.routes")(app);
-require("./routes/staffPwd.routes")(app);
 require("./routes/creditCard.routes")(app);
 require("./routes/inventory.routes")(app);
+require('./routes/auth.routes')(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
