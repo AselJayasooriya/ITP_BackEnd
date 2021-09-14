@@ -21,7 +21,6 @@ exports.create = (req, res) => {
   empform
     .save(empform)
     .then((data) => {
-      console.log(data);
       res.send(data);
     })
     .catch((err) => {
@@ -36,11 +35,9 @@ exports.create = (req, res) => {
 // Retrieve all Employee details with matching emp ID from the database.
 exports.findAllByEmpID = (req, res) => {
   const empID = req.params.id;
-  console.log(req.params);
   EmpDetails.find({ emp_id: empID })
     .then((data) => {
       res.send(data);
-      console.log(data);
     })
     .catch((err) => {
       res.status(500).send({
@@ -52,7 +49,6 @@ exports.findAllByEmpID = (req, res) => {
 
 // Delete a form with the specified id in the request
 exports.delete = async (req, res) => {
-  console.log("delete method executed");
   let Id = req.params.id;
   await EmpDetails.findOneAndDelete({ _id: Id })
     .then(() => {
@@ -69,11 +65,24 @@ exports.getAll = (req, res) => {
   EmpDetails.find()
     .then((data) => {
       res.json(data);
-      
+
     })
     .catch((err) => {
       alert(err);
     });
+};
+
+// Retrieve all Doctors from the database.
+exports.getAllDoctors = (req, res) => {
+    console.log("Find all doctors method called")
+    EmpDetails.find( { role : 'Doctor' } )
+        .then(data => {
+            res.send(data);
+            console.log(data)
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 };
 
 // Update an Emp detail by the id in the request
@@ -104,12 +113,10 @@ exports.update = (req, res) => {
 // Delete an empform  with the specified Id in the request
 exports.delete = (req, res) => {
   const ID = req.params.id;
-  console.log(ID);
   EmpDetails.deleteOne({ _id: ID })
       .then(response => {
           res.send(response);
           console.log(response);
-          console.log("deleted")
       })
       .catch(err => {
           res.status(500).send({

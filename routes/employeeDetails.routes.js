@@ -7,10 +7,13 @@ module.exports = (app) => {
   router.post("/", empform.create);
 
   // Retrieve all empform data with given Emp ID
-  router.get("/:id", empform.findAllByEmpID);
+  router.get("emp/:id", empform.findAllByEmpID);
 
   //find all data
   router.get("/", empform.getAll);
+
+  //find all doctors
+  router.get("/doctors", empform.getAllDoctors)
 
   // Update a empform with id
   router.put("/:id", empform.update);
