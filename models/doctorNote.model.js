@@ -4,8 +4,10 @@ module.exports = mongoose => {
         mongoose.Schema(
             {
                 pNoteId: {
-                    type: Number,
-                    required: true
+                    type: String,
+                    required: true,
+                    maxLength: 10,
+                    minLength: 10
                 },
                 pNoteName: {
                     type: String,
