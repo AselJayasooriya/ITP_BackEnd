@@ -13,5 +13,7 @@ db.creditCardPayments = require("./creditCardDetails.model")(mongoose);
 db.inventory = require("./inventory.model")(mongoose);
 db.employees = require("./employeeDetails.model")(mongoose);
 db.tests = require("./tests.model.js")(mongoose);
+db.channell = require("./echannelling.model")(mongoose);
+db.inquiry = require("./postInquiry.model")(mongoose);
 
 module.exports = db;
