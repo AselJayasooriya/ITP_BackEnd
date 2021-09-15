@@ -30,21 +30,16 @@ exports.create = (req, res) => {
 };
 
 // Retrieve all Inquiry with id given from
-exports.findAllByInquiryID = (req, res) => {
-    const inquiryID = req.params.id;
-console.log(req.params);
-Inquiry.find({ inquiry_id: inquiryID })
-        .then(data => {
-            res.send(data);
-            console.log(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving inquiry."
-            });
-        });
-};
+exports.findAll = (req, res) => {
+    Inquiry.find()
+      .then((data) => {
+        res.json(data);
+        console.log(data);
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  };
 
 // Update a channelling by the id in the request
 exports.put = (req, res) => {

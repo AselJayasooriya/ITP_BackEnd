@@ -3,9 +3,14 @@ module.exports = mongoose => {
         "inquiry",
         mongoose.Schema(
             {
-               title:String,
-               message:String,
-          
+               title:{
+                   type:String,
+                   required: true
+                },
+               message:{
+                   type:String,
+                   required: true
+                }
             },
             { timestamps: true }
         )

@@ -6,7 +6,7 @@ module.exports = app => {
     router.post("/add", inquiry.create);
      
     // Retrieve all inquiry with given inquriy ID
-    router.get("/:id", inquiry.findAllByInquiryID);
+    router.get("/", inquiry.findAll);
 
     // Update a Inquiry with id
     router.put("/:id", inquiry.put);

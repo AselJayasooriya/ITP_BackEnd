@@ -8,13 +8,13 @@ exports.create = (req, res) => {
     console.log(req.body);
 
     const channell = new Channell({
-        fullname: req.body.FullName,
-        nic: req.body.NICNumber,
-        email: req.body.EmailAddress,
-        mobile: req.body.MobileNumber,
-        age: req.body.Age,
+        fullname: req.body.fullname,
+        nic: req.body.nic,
+        email: req.body.email,
+        mobile: req.body.mobile,
+        age: req.body.age,
         
-    });
+    }); 
     channell
         .save(channell)
         .then(data => {
