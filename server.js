@@ -13,6 +13,9 @@ app.use(cors(corsOptions));
 // parse requests of content-type - application/json
 app.use(express.json());
 
+// parse requests of content-type - application/json
+app.use(bodyParser.json());
+
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
@@ -44,6 +47,8 @@ require("./routes/tests.routes")(app);
 require("./routes/employeeDetails.routes")(app);
 require("./routes/creditCard.routes")(app);
 require("./routes/inventory.routes")(app);
+require("./routes/echannelling.routes")(app);
+require("./routes/postInquiry.routes")(app);
 require('./routes/auth.routes')(app);
 
 // set port, listen for requests
