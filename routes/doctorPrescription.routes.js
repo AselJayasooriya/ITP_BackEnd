@@ -10,10 +10,13 @@ module.exports = app => {
     router.get("/:id", prescriptions.findAll);
 
     //update the prescription of given patient name
-    router.put("/:id",prescriptions.update);
+    router.put("/:id", prescriptions.update);
 
     //delete a prescription of given id
     router.delete("/:id", prescriptions.delete);
+
+    // Retrieve a single Prescription with id
+    router.get("/edit/:id", prescriptions.findOne);
 
     app.use('/api/prescriptions', router);
 };
