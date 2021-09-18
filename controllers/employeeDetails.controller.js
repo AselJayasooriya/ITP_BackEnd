@@ -76,11 +76,9 @@ exports.getAll = (req, res) => {
 
 // Retrieve all Doctors from the database.
 exports.getAllDoctors = (req, res) => {
-    console.log("Find all doctors method called")
     EmpDetails.find( { role : 'Doctor' } )
         .then(data => {
             res.send(data);
-            console.log(data)
         })
         .catch((err) => {
             console.log(err);

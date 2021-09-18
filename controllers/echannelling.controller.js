@@ -48,6 +48,17 @@ Channell.find({ chanell_id: channellID })
         });
 };
 
+// Retrieve all appoitnemnts with id
+exports.findAll = (req, res) => {
+    Channell.find()
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send("Some error occurred while retrieving chanelling.");
+        });
+};
+
 exports.findAllByStatus = (req, res) => {
     const wantedStatus = req.params.status
     Channell.find({ status: wantedStatus }).populate('dSession')
@@ -61,6 +72,20 @@ exports.findAllByStatus = (req, res) => {
             });
         });
 };
+
+var getCount = async function (req, res) {
+    var pendingCount = await Channell.countDocuments({ status: 'Pending' });
+    var checkedinCount =  await Channell.countDocuments({status: 'CheckedIn'});
+    var allCount = await Channell.estimatedDocumentCount();
+
+    const count = {
+        "All Appointments": allCount,
+        "Pending Appointments": pendingCount,
+        "Checked-In Patients": checkedinCount,
+    }
+    res.send(count);
+};
+exports.getCount = getCount;
 
 
 // Update a channelling by the id in the request
