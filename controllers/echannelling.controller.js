@@ -48,9 +48,9 @@ Channell.find({ chanell_id: channellID })
         });
 };
 
-// Retrieve all appoitnemnts with id
+// Retrieve all appoitnemnts
 exports.findAll = (req, res) => {
-    Channell.find()
+    Channell.find().populate('dSession')
         .then(data => {
             res.send(data);
         })
@@ -59,6 +59,7 @@ exports.findAll = (req, res) => {
         });
 };
 
+// Retrieve all appoitnemnts by appointment status (Pending/CheckedIn)
 exports.findAllByStatus = (req, res) => {
     const wantedStatus = req.params.status
     Channell.find({ status: wantedStatus }).populate('dSession')
@@ -73,22 +74,35 @@ exports.findAllByStatus = (req, res) => {
         });
 };
 
+//Get the Number of documents in the database
 var getCount = async function (req, res) {
     var pendingCount = await Channell.countDocuments({ status: 'Pending' });
     var checkedinCount =  await Channell.countDocuments({status: 'CheckedIn'});
     var allCount = await Channell.estimatedDocumentCount();
 
     const count = {
-        "All Appointments": allCount,
-        "Pending Appointments": pendingCount,
-        "Checked-In Patients": checkedinCount,
+        all : {
+            text:"All Appointments",
+            path: "/staff/receptionist/allappointments",
+            number: allCount,
+        },
+        pending: {
+            text:"Pending Appointments",
+            path: "/staff/receptionist/pendingappointments",
+            number: pendingCount,
+        },
+        checkedin :{
+            text:"Checked-In Patients",
+            path: "/staff/receptionist/checkedinappointments",
+            number: checkedinCount,
+        }
     }
     res.send(count);
 };
 exports.getCount = getCount;
 
 
-// Update a channelling by the id in the request
+// Update a channelling by the id and status in the request
 exports.updateStatus = (req, res) => {
     const ID = req.params.id.toString();
     const newStatus = req.params.status.toString();
