@@ -12,6 +12,9 @@ module.exports = app => {
     // // Update a Session with id
     // router.put("/:id", sessions.update);
 
+    // Increase current appointments by one
+    router.put("/increment/:id", sessions.increaseCurrentAppointments);
+    
     // Delete a Session with id
     router.delete("/:id", sessions.delete);
 

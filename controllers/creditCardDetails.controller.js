@@ -1,3 +1,4 @@
+const e = require("express");
 const db = require("../models");
 const Credit = db.creditCardPayments;
 
@@ -56,30 +57,29 @@ exports.findAllByDPaymentID = (req, res) => {
     });
 };
 
-// // Update a Session by the id in the request
-// exports.update = (req, res) => {};
-//
-// Delete a Session with the specified id in the request
+exports.update = (req, res) => {
+  let id = req.params.id;
+  let Amount = req.body.amount;
 
-// exports.delete(async (req, res) => {
-//   console.log("delete method executed");
-//   let Id = req.params.id;
-//   await Credit.findOneAndDelete(Id)
-//     .then(() => {
-//       res.status(200).send({ status: "user deleted" });
-//     })
-//     .catch((e) => {
-//       console.log(e);
-//       res.status(400).send({ status: "error in delete operation" });
-//     });
-// });
-// // Delete all Sessions from the database.
-// exports.deleteAll = (req, res) => {};
+  Credit.findByIdAndUpdate(
+    { _id: id },
+    { amount: Amount },
+    { useFindAndModify: false }
+  )
+    .then(() => {
+      console.log("upadated from front end");
+      res.status(200).send({ status: "user updated" + id });
+    })
+    .catch((e) => {
+      console.log(e);
+      res.status(400).send({ status: "error in delete operation:" + e });
+    });
+};
 
-exports.delete = async (req, res) => {
+exports.delete = (req, res) => {
   console.log("delete method executed");
   let Id = req.params.id;
-  await Credit.findOneAndDelete({ _id: Id })
+  Credit.findOneAndDelete({ _id: Id })
     .then(() => {
       res.status(200).send({ status: "user deleted" });
     })

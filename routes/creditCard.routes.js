@@ -11,7 +11,7 @@ module.exports = (app) => {
   router.get("/:id", credit.findAllByDPaymentID);
 
   // Update a Session with id
-  // router.put("/:id", credit.update);
+  router.put("/:id", credit.update);
   //
   // Delete a Creditcard with id
   router.delete("/:id", credit.delete);

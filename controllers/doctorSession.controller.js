@@ -23,13 +23,12 @@ exports.create = (req, res) => {
         });
 
 
-
 };
 
 // Retrieve all Sessions with matching doctor ID from the database.
 exports.findAllByDoctorID = (req, res) => {
     const doctorID = req.params.id;
-        Session.find({ doctor_id: doctorID })
+    Session.find({doctor_id: doctorID}).sort( { date: -1 } )
         .then(data => {
             res.send(data);
         })
@@ -41,19 +40,31 @@ exports.findAllByDoctorID = (req, res) => {
         });
 };
 
-// Update a Session by the id in the request
-// exports.update = (req, res) => {
-//
-// };
+// Increase Current Appointments of a Session by the id in the request
+exports.increaseCurrentAppointments = (req, res) => {
+    const ID = req.params.id.toString();
+    Session.updateOne(
+        {_id: ID, $expr: {$gt: ["$maxAppointments", "$currentAppointments"]}},
+        {$inc: {"currentAppointments": 1}},
+    )
+        .then(response => {
+            if (response.modifiedCount > 0)
+                res.status(200).send("Successfully Updated")
+            else
+                res.status(400).send("Update Failed. Maximum Appointments Reached");
+
+        })
+        .catch(err => {
+            res.send("Error update");
+        });
+};
 
 // Delete a Session with the specified id in the request
 exports.delete = (req, res) => {
     const ID = req.params.id;
-    console.log(ID);
-    Session.deleteOne({ _id: ID })
+    Session.deleteOne({_id: ID})
         .then(response => {
             res.send(response);
-            console.log(response);
             console.log("deleted")
         })
         .catch(err => {

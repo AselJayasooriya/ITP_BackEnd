@@ -21,5 +21,8 @@ module.exports = (app) => {
   // Delete a empform with id
   router.delete("/:id", empform.delete);
 
+  //find single employee by id
+  router.get("/:id", empform.findOne);
+
   app.use("/api/empform", router); //this is the base url
 };

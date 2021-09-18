@@ -1,26 +1,29 @@
 const db = require("../models");
 const Channell = db.channell;
-
+const Session = db.sessions;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 // Create and Save a new channelling
 
 exports.create = (req, res) => {
-    console.log(req.body);
-
     const channell = new Channell({
+        dSession:  mongoose.Types.ObjectId(req.body.session),
         fullname: req.body.fullname,
         nic: req.body.nic,
         email: req.body.email,
         mobile: req.body.mobile,
         age: req.body.age,
+        status: "Pending",
         
-    }); 
+    });
     channell
         .save(channell)
         .then(data => {
             res.send(data);
         })
         .catch(err => {
+            console.log(err)
             res.status(500).send({
                 message: err.message || "Some error occured while creating your channelling please try again."
             });
@@ -33,11 +36,9 @@ exports.create = (req, res) => {
 // Retrieve all appoitnemnts with id
 exports.findAllByChannellID = (req, res) => {
     const channellID = req.params.id;
-console.log(req.params);
 Channell.find({ chanell_id: channellID })
         .then(data => {
             res.send(data);
-            console.log(data);
         })
         .catch(err => {
             res.status(500).send({
@@ -47,9 +48,63 @@ Channell.find({ chanell_id: channellID })
         });
 };
 
-// Update a channelling by the id in the request
-exports.update = (req, res) => {
+// Retrieve all appoitnemnts with id
+exports.findAll = (req, res) => {
+    Channell.find()
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send("Some error occurred while retrieving chanelling.");
+        });
+};
 
+exports.findAllByStatus = (req, res) => {
+    const wantedStatus = req.params.status
+    Channell.find({ status: wantedStatus }).populate('dSession')
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving chanelling."
+            });
+        });
+};
+
+var getCount = async function (req, res) {
+    var pendingCount = await Channell.countDocuments({ status: 'Pending' });
+    var checkedinCount =  await Channell.countDocuments({status: 'CheckedIn'});
+    var allCount = await Channell.estimatedDocumentCount();
+
+    const count = {
+        "All Appointments": allCount,
+        "Pending Appointments": pendingCount,
+        "Checked-In Patients": checkedinCount,
+    }
+    res.send(count);
+};
+exports.getCount = getCount;
+
+
+// Update a channelling by the id in the request
+exports.updateStatus = (req, res) => {
+    const ID = req.params.id.toString();
+    const newStatus = req.params.status.toString();
+    Channell.updateOne(
+        { _id: ID },
+        {status: newStatus},
+    )
+        .then(response => {
+            if (response.nModified > 0)
+                res.status(200).send("Successfully Updated")
+            else
+                res.status(400).send("0 rows updated");
+        })
+        .catch(err => {
+            res.send("Error update");
+        });
 };
 
 // Delete a channelling with the specified id in the request
