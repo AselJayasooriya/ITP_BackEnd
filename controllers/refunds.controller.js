@@ -28,7 +28,7 @@ exports.create = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-  Credit.find()
+  Refund.find()
     .then((data) => {
       res.json(data);
       console.log(data);

@@ -1,6 +1,5 @@
 module.exports = (app) => {
-  
-  const refund= require("../controllers/refunds.controller")
+  const refund = require("../controllers/refunds.controller");
   let router = require("express").Router();
 
   // Create a new creditcard

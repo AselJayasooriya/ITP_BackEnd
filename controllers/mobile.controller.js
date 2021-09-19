@@ -10,7 +10,6 @@ exports.create = (req, res) => {
   const mobile = new Mobile({
     name: req.body.name,
     phonenumber: req.body.phonenumber,
-  
   });
   mobile
     .save(mobile)
@@ -28,7 +27,7 @@ exports.create = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-  Credit.find()
+  Mobile.find()
     .then((data) => {
       res.json(data);
       console.log(data);
@@ -42,7 +41,7 @@ exports.findAll = (req, res) => {
 exports.findAllByDPaymentID = (req, res) => {
   const paymentID = req.params.id;
   console.log(req.params);
-  Credit.find({ _id: paymentID })
+  Mobile.find({ _id: paymentID })
     .then((data) => {
       res.send("retruned with id" + data);
       console.log(data);
