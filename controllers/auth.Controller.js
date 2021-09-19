@@ -6,7 +6,8 @@ var jwt = require("jsonwebtoken");
 
 exports.signin = (req, res) => {
   Employee.findOne({
-    email: req.body.email
+    email: req.body.email,
+    password:req.body.password
   })
     .exec((err, user) => {
       if (err) {
@@ -45,6 +46,7 @@ exports.signin = (req, res) => {
         email: user.email,
         mobile: user.mobile,
         address: user.address,
+        password: user.password,
         accessToken: token
       });
     });

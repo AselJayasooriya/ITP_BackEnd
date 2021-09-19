@@ -48,7 +48,7 @@ exports.increaseCurrentAppointments = (req, res) => {
         {$inc: {"currentAppointments": 1}},
     )
         .then(response => {
-            if (response.modifiedCount > 0)
+            if (response.modifiedCount > 0 || response.nModified > 0)
                 res.status(200).send("Successfully Updated")
             else
                 res.status(400).send("Update Failed. Maximum Appointments Reached");
@@ -65,7 +65,6 @@ exports.delete = (req, res) => {
     Session.deleteOne({_id: ID})
         .then(response => {
             res.send(response);
-            console.log("deleted")
         })
         .catch(err => {
             res.status(500).send({

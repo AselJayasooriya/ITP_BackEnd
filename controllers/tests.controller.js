@@ -93,8 +93,8 @@ exports.client = (req, res) => {
         .then(data => {
             if (data) {
                 res.send(data);
-            }else res.send({ message: "Thre are no tests regarding to those credentials." });
-            
+            } else res.send({ message: "Thre are no tests regarding to those credentials." });
+
 
         })
         .catch(err => {
@@ -133,39 +133,64 @@ exports.update = (req, res) => {
 // Delete a test with id
 exports.delete = (req, res) => {
     const id = req.params.id;
-  
+
     Tests.findByIdAndRemove(id)
-      .then(data => {
-        if (!data) {
-          res.status(404).send({
-            message: `Cannot delete Tests with id=${id}. Maybe Test was not found!`
-          });
-        } else {
-          res.send({
-            message: "Test was deleted successfully!"
-          });
-        }
-      })
-      .catch(err => {
-        res.status(500).send({
-          message: "Could not delete Test with id=" + id
+        .then(data => {
+            if (!data) {
+                res.status(404).send({
+                    message: `Cannot delete Tests with id=${id}. Maybe Test was not found!`
+                });
+            } else {
+                res.send({
+                    message: "Test was deleted successfully!"
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Could not delete Test with id=" + id
+            });
         });
-      });
-  };
+};
 
 // Find a single test with an id
 exports.findOne = (req, res) => {
     const id = req.params.id;
-  
+
     Tests.findById(id)
-      .then(data => {
-        if (!data)
-          res.status(404).send({ message: "Not found test with id " + id });
-        else res.send(data);
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .send({ message: "Error retrieving test with id=" + id });
-      });
-  };
+        .then(data => {
+            if (!data)
+                res.status(404).send({ message: "Not found test with id " + id });
+            else res.send(data);
+        })
+        .catch(err => {
+            res
+                .status(500)
+                .send({ message: "Error retrieving test with id=" + id });
+        });
+};
+
+//get test stat
+exports.getstat =  async(req, res) => {
+    const today = new Date();
+    const latYear = today.setFullYear(today.setFullYear() - 1);
+
+    try {
+        const data = await Tests.aggregate([
+            {
+                $project: {
+                    month: { $month: "$createdAt" },
+                },
+            },
+            {
+                $group: {
+                    _id: "$month",
+                    total: { $sum: 1 },
+                },
+            },
+        ]);
+        res.status(200).json(data)
+    } catch (err) {
+        res.status(500).json(err);
+    }
+};
