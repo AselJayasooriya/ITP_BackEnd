@@ -8,8 +8,8 @@ exports.create = (req, res) => {
     console.log(req.body);
     //Create a Inquiry
     const inquiry = new Inquiry({
-        title: req.body.Title,
-        message: req.body.Message,
+        title: req.body.title,
+        message: req.body.message,
      
     });
 
@@ -62,32 +62,33 @@ exports.findAll = (req, res) => {
 
 
 
-// Update a channelling by the id in the request
+//update a inquiry by id
 exports.update = (req, res) => {
     if (!req.body) {
-      return res.status(400).send({
-        message: "Data to update can not be empty!"
-      });
-    }
-  
-    const id = req.params.id;
-  
-    Inquiry.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
-      .then(data => {
-        if (!data) {
-          res.status(404).send({
-            message: `Cannot update Inquory with id=${id}. Maybe Tutorial was not found!`
-          });
-        } else res.send({ message: "Inquiry was updated successfully." });
-      })
-      .catch(err => {
-        res.status(500).send({
-          message: "Error updating Inquiry with id=" + id
+        return res.status(400).send({
+            message: "Data to update can not be empty!"
         });
-      });
-  };
+    }
 
-  
+    const id = req.params.id;
+
+    Inquiry.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+        .then(data => {
+            if (!data) {
+                res.status(404).send({
+                    message: `Cannot update test with id=${id}. Maybe test was not found!`
+                });
+            } else res.send({ message: "Test was updated successfully." });
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Error updating Tutorial with id=" + id
+            });
+        });
+};
+
+
+
 // Delete a inquiry with specific id in the request
 exports.delete = (req, res) => {
     const id = req.params.id;
