@@ -30,7 +30,7 @@ exports.getAll = (req, res) => {
     Note.find()
         .then((data) => {
             res.json(data);
-            console.log(data);
+            //console.log(data);
         })
         .catch((err) => {
             alert(err);
