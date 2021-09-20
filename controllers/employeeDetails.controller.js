@@ -27,7 +27,6 @@ exports.create = (req, res) => {
       console.log(err);
       return;
     }
-    console.log("sent: " + info.response);
   });
 
   //validate request
