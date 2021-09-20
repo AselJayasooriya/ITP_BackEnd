@@ -15,7 +15,7 @@ exports.create = (req, res) => {
   refund
     .save(refund)
     .then((data) => {
-      console.log(data);
+      // console.log(data);
       res.send(data);
     })
     .catch((err) => {
@@ -31,7 +31,7 @@ exports.findAll = (req, res) => {
   Refund.find()
     .then((data) => {
       res.json(data);
-      console.log(data);
+      // console.log(data);
     })
     .catch((err) => {
       alert(err);
@@ -45,7 +45,7 @@ exports.findAllByDPaymentID = (req, res) => {
   Credit.find({ _id: paymentID })
     .then((data) => {
       res.send("retruned with id" + data);
-      console.log(data);
+      // console.log(data);
     })
     .catch((err) => {
       res.status(500).send({
@@ -65,24 +65,24 @@ exports.update = (req, res) => {
     { useFindAndModify: false }
   )
     .then(() => {
-      console.log("upadated from front end");
+      // console.log("upadated from front end");
       res.status(200).send({ status: "user updated" + id });
     })
     .catch((e) => {
-      console.log(e);
+      // console.log(e);
       res.status(400).send({ status: "error in delete operation:" + e });
     });
 };
 
 exports.delete = (req, res) => {
-  console.log("delete method executed");
+  // console.log("delete method executed");
   let Id = req.params.id;
   Credit.findOneAndDelete({ _id: Id })
     .then(() => {
       res.status(200).send({ status: "user deleted" });
     })
     .catch((e) => {
-      console.log(e);
+      // console.log(e);
       res.status(400).send({ status: "error in delete operation" });
     });
 };
