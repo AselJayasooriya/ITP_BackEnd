@@ -1,36 +1,34 @@
 const db = require("../models");
 const Channell = db.channell;
-const Session = db.sessions;
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
 const nodemailer = require("nodemailer");
 
 // Create and Save a new channelling
 
 exports.create = (req, res) => {
 
-//sending echanelling details via an email
-const transporter = nodemailer.createTransport({
-    service: "hotmail",
-    auth: {
-      user: "ispirithalei@outlook.com",
-      pass: "@waCamDa!69",
-    },
-  });
+    //sending echanelling details via an email
+    const transporter = nodemailer.createTransport({
+        service: "hotmail",
+        auth: {
+            user: "ispirithalei@outlook.com",
+            pass: "@waCamDa!69",
+        },
+    });
 
-  const options = {
-    from: "ispirithalei@outlook.com",
-    to: req.body.email,
-    subject: "Echanelling Confrimation {ISPIRITHALEI}",
-    text: "Entered Fullname: " + req.body.fullname + "\nEntered NIC: " + req.body.nic +"\nEntered Mobile :"+req.body.mobile +"\nEntered Age:"+req.body.age ,
-  };
+    const options = {
+        from: "ispirithalei@outlook.com",
+        to: req.body.email,
+        subject: "Echanelling Confrimation {ISPIRITHALEI}",
+        text: "Entered Fullname: " + req.body.fullname + "\nEntered NIC: " + req.body.nic + "\nEntered Mobile :" + req.body.mobile + "\nEntered Age:" + req.body.age,
+    };
 
-  transporter.sendMail(options, function (err, info) {
-    if (err) {
-      console.log(err);
-      return;
-    }
-  });
+    transporter.sendMail(options, function (err, info) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+    });
 
 
     const channell = new Channell({
@@ -61,7 +59,7 @@ const transporter = nodemailer.createTransport({
 // Retrieve all appoitnemnts with id
 exports.findAllByChannellID = (req, res) => {
     const channellID = req.params.id;
-    Channell.find({chanell_id: channellID})
+    Channell.find({ chanell_id: channellID })
         .then(data => {
             res.send(data);
         })
@@ -87,7 +85,7 @@ exports.findAll = (req, res) => {
 // Retrieve all appoitnemnts by appointment status (Pending/CheckedIn)
 exports.findAllByStatus = (req, res) => {
     const wantedStatus = req.params.status
-    Channell.find({status: wantedStatus}).populate('dSession')
+    Channell.find({ status: wantedStatus }).populate('dSession')
         .then(data => {
             res.send(data);
         })
@@ -101,40 +99,40 @@ exports.findAllByStatus = (req, res) => {
 
 //Get the Number of documents in the database
 var getCount = async function (req, res) {
-        var pendingCount = await Channell.countDocuments({status: 'Pending'});
-        var checkedinCount = await Channell.countDocuments({status: 'CheckedIn'});
-        var allCount = await Channell.estimatedDocumentCount();
+    var pendingCount = await Channell.countDocuments({ status: 'Pending' });
+    var checkedinCount = await Channell.countDocuments({ status: 'CheckedIn' });
+    var allCount = await Channell.estimatedDocumentCount();
 
-        const weekData = await Channell.aggregate([
-            {
-                "$lookup": {
-                    "from": "sessions",
-                    "localField": "dSession",
-                    "foreignField": "_id",
-                    "as": "session"
-                }
-            },
-            {
-                "$project": {
-                    "_id:": 1,
-                    "session.date": {
-                        "$dayOfWeek": {
-                            $dateFromString: {
-                                dateString: {$arrayElemAt: ["$session.date", 0]}
-                            }
+    const weekData = await Channell.aggregate([
+        {
+            "$lookup": {
+                "from": "sessions",
+                "localField": "dSession",
+                "foreignField": "_id",
+                "as": "session"
+            }
+        },
+        {
+            "$project": {
+                "_id:": 1,
+                "session.date": {
+                    "$dayOfWeek": {
+                        $dateFromString: {
+                            dateString: { $arrayElemAt: ["$session.date", 0] }
                         }
-                    },
-
-                }
-            },
-
-            {
-                "$group": {
-                    "_id": {$arrayElemAt: ["$session.date", 0]},
-                    "count": {$sum: 1},
+                    }
                 },
+
+            }
+        },
+
+        {
+            "$group": {
+                "_id": { $arrayElemAt: ["$session.date", 0] },
+                "count": { $sum: 1 },
             },
-        ])
+        },
+    ])
 
     var hasResult = []
     for (var week of weekData) {
@@ -157,31 +155,31 @@ var getCount = async function (req, res) {
     weekData[5]._id = "Sat"
     weekData[6]._id = "Sun"
 
-        const count = {
-            all: {
-                text: "All Appointments",
-                path: "/staff/receptionist/allappointments",
-                number: allCount,
-            },
-            pending: {
-                text: "Pending",
-                path: "/staff/receptionist/pendingappointments",
-                number: pendingCount,
-            },
-            checkedin: {
-                text: "Checked-In",
-                path: "/staff/receptionist/checkedinappointments",
-                number: checkedinCount,
-            }
+    const count = {
+        all: {
+            text: "All Appointments",
+            path: "/staff/receptionist/allappointments",
+            number: allCount,
+        },
+        pending: {
+            text: "Pending",
+            path: "/staff/receptionist/pendingappointments",
+            number: pendingCount,
+        },
+        checkedin: {
+            text: "Checked-In",
+            path: "/staff/receptionist/checkedinappointments",
+            number: checkedinCount,
         }
-
-        const sendData = {
-            count : { ...count},
-            week : { weekData },
-        }
-        res.send(sendData);
     }
-;
+
+    const sendData = {
+        count: { ...count },
+        week: { weekData },
+    }
+    res.send(sendData);
+}
+    ;
 exports.getCount = getCount;
 
 
@@ -190,8 +188,8 @@ exports.updateStatus = (req, res) => {
     const ID = req.params.id.toString();
     const newStatus = req.params.status.toString();
     Channell.updateOne(
-        {_id: ID},
-        {status: newStatus},
+        { _id: ID },
+        { status: newStatus },
     )
         .then(response => {
             if (response.nModified > 0)
