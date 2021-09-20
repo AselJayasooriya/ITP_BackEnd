@@ -5,11 +5,11 @@ const Inquiry = db.inquiry;
 // Create and Save a new Inquiry
 
 exports.create = (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     //Create a Inquiry
     const inquiry = new Inquiry({
-        title: req.body.Title,
-        message: req.body.Message,
+        title: req.body.title,
+        message: req.body.message,
      
     });
 
@@ -34,38 +34,60 @@ exports.findAll = (req, res) => {
     Inquiry.find()
       .then((data) => {
         res.json(data);
-        console.log(data);
+        // console.log(data);
       })
       .catch((err) => {
         alert(err);
       });
   };
+  
+//Find a single inquiry with an id:
+  exports.findOne = (req, res) => {
+    const id = req.params.id;
+  
+    Inquiry.findById(id)
+      .then(data => {
+        if (!data)
+          res.status(404).send({ message: "Not found Inquiry with id " + id });
+        else res.send(data);
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .send({ message: "Error retrieving Inquiry with id=" + id });
+      });
+  };
 
-// Update a channelling by the id in the request
-exports.put = (req, res) => {
-    if(!req.body){
+
+
+
+
+//update a inquiry by id
+exports.update = (req, res) => {
+    if (!req.body) {
         return res.status(400).send({
-            message:"Data you want to update cannot be empty!"
+            message: "Data to update can not be empty!"
         });
     }
 
-    const id= req.params.id;
-    
-    Inquiry.findByIdAndUpdate(id,req.body,{useFindAndModify:false})
-    .then(data =>{
-        if (!data){
-            res.status(400).send({
-                message:'Cannot update the inqury of id =${id} May be inuqiry was not found!'
-            });
-        }else res.send({ message: 'Inquiry was sucessfully updated'});
-    })
-    .catch(err =>{
-        res.status(500).send({
-            message:'Error updating inquiry with id :'+id
-        });
-    })
+    const id = req.params.id;
 
+    Inquiry.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+        .then(data => {
+            if (!data) {
+                res.status(404).send({
+                    message: `Cannot update test with id=${id}. Maybe test was not found!`
+                });
+            } else res.send({ message: "Test was updated successfully." });
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Error updating Tutorial with id=" + id
+            });
+        });
 };
+
+
 
 // Delete a inquiry with specific id in the request
 exports.delete = (req, res) => {
