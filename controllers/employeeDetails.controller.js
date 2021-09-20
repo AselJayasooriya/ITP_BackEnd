@@ -140,7 +140,7 @@ exports.delete = (req, res) => {
   EmpDetails.deleteOne({ _id: ID })
     .then((response) => {
       res.send(response);
-      console.log(response);
+      //console.log(response);
     })
     .catch((err) => {
       res.status(500).send({
