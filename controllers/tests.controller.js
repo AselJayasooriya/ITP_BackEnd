@@ -3,7 +3,7 @@ const Tests = db.tests;
 
 // Create and Save a new Test
 exports.create = (req, res) => {
-    console.log(req.body);
+    //console.log(req.body);
 
     const test = new Tests({
         specimenid: req.body.specimenid,
@@ -40,7 +40,7 @@ exports.getAll = (req, res) => {
     Tests.find()
         .then((data) => {
             res.json(data);
-            console.log(data);
+            //console.log(data);
         })
         .catch((err) => {
             alert(err);
@@ -52,7 +52,7 @@ exports.findAllSubbmitted = (req, res) => {
     Tests.find({ status: "subbmitted" })
         .then((data) => {
             res.json(data);
-            console.log(data);
+            //console.log(data);
         })
         .catch((err) => {
             alert(err);
@@ -64,7 +64,7 @@ exports.findAllCompleted = (req, res) => {
     Tests.find({ status: "completed" })
         .then((data) => {
             res.json(data);
-            console.log(data);
+            //console.log(data);
         })
         .catch((err) => {
             alert(err);
@@ -76,7 +76,7 @@ exports.findAllStarted = (req, res) => {
     Tests.find({ status: "started" })
         .then((data) => {
             res.json(data);
-            console.log(data);
+            //console.log(data);
         })
         .catch((err) => {
             alert(err);
@@ -85,7 +85,7 @@ exports.findAllStarted = (req, res) => {
 
 //retrive a single test when specimen id and contact number correct
 exports.client = (req, res) => {
-    console.log(req.query)
+    //console.log(req.query)
     const contactnumber = req.query.contactnumber;
     const specimenid = req.query.specimenid;
     //console.log(contactnumber, specimenid)
