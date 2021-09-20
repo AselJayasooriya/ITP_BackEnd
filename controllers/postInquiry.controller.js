@@ -5,7 +5,7 @@ const Inquiry = db.inquiry;
 // Create and Save a new Inquiry
 
 exports.create = (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     //Create a Inquiry
     const inquiry = new Inquiry({
         title: req.body.title,
@@ -34,7 +34,7 @@ exports.findAll = (req, res) => {
     Inquiry.find()
       .then((data) => {
         res.json(data);
-        console.log(data);
+        // console.log(data);
       })
       .catch((err) => {
         alert(err);
