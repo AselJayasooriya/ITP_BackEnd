@@ -1,11 +1,36 @@
 const e = require("express");
 const db = require("../models");
+const nodemailer = require("nodemailer");
 const Credit = db.creditCardPayments;
 
 // Create and Save a new creditCard
 
 exports.create = (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
+
+  const transporter = nodemailer.createTransport({
+    service: "hotmail",
+    auth: {
+      user: "ispirithalei@outlook.com",
+      pass: "@waCamDa!69",
+    },
+  });
+
+  const options = {
+    from: "ispirithalei@outlook.com",
+    to: req.body.email,
+    subject: "E-Bill",
+    text: "Dear " + req.body.name + ",",
+    html: "<h1>Payment Successful</h1>",
+  };
+
+  transporter.sendMail(options, function (err, info) {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    console.log("sent: " + info.response);
+  });
 
   const credit = new Credit({
     payment_id: req.body.paymentid,
