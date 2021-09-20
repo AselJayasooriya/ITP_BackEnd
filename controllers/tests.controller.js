@@ -88,20 +88,20 @@ exports.client = (req, res) => {
     console.log(req.query)
     const contactnumber = req.query.contactnumber;
     const specimenid = req.query.specimenid;
-    console.log(contactnumber, specimenid)
-    Tests.find({ contactnumber: contactnumber, specimenid: specimenid })
+    //console.log(contactnumber, specimenid)
+    Tests.findOne({
+        contactnumber: contactnumber,
+        specimenid: specimenid
+    })
         .then(data => {
-            if (data) {
-                res.send(data);
-            } else res.send({ message: "Thre are no tests regarding to those credentials." });
-
-
+            if (!data)
+                res.status(404).send({ message: "Not found test with contact number " + contactnumber });
+            else res.send(data);
         })
         .catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving tests."
-            });
+            res
+                .status(500)
+                .send({ message: "Error retrieving test with id=" + id });
         });
 }
 
@@ -171,7 +171,7 @@ exports.findOne = (req, res) => {
 };
 
 //get test stat
-exports.getstat =  async(req, res) => {
+exports.getstat = async (req, res) => {
     const today = new Date();
     const latYear = today.setFullYear(today.setFullYear() - 1);
 
