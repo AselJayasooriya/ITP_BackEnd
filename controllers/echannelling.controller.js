@@ -30,7 +30,6 @@ const transporter = nodemailer.createTransport({
       console.log(err);
       return;
     }
-    console.log("sent: " + info.response);
   });
 
 
