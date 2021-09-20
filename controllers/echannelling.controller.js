@@ -3,10 +3,37 @@ const Channell = db.channell;
 const Session = db.sessions;
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const nodemailer = require("nodemailer");
 
 // Create and Save a new channelling
 
 exports.create = (req, res) => {
+
+//sending echanelling details via an email
+const transporter = nodemailer.createTransport({
+    service: "hotmail",
+    auth: {
+      user: "ispirithalei@outlook.com",
+      pass: "@waCamDa!69",
+    },
+  });
+
+  const options = {
+    from: "ispirithalei@outlook.com",
+    to: req.body.email,
+    subject: "Echanelling Confrimation {ISPIRITHALEI}",
+    text: "Entered Fullname: " + req.body.fullname + "\nEntered NIC: " + req.body.nic +"\nEntered Mobile :"+req.body.mobile +"\nEntered Age:"+req.body.age ,
+  };
+
+  transporter.sendMail(options, function (err, info) {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    console.log("sent: " + info.response);
+  });
+
+
     const channell = new Channell({
         dSession: mongoose.Types.ObjectId(req.body.session),
         fullname: req.body.fullname,
