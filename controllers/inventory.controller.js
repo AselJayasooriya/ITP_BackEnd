@@ -3,8 +3,6 @@ const Inventory = db.inventory;
 
 // Create and Save a new Inventory item
 exports.create = (req, res) => {
-    console.log(req.body);
-
     const inventory = new Inventory({
         item_id: req.body.item_id,
         item_name: req.body.item_name,
@@ -35,7 +33,6 @@ exports.getAll = (req, res) => {
     Inventory.find()
         .then((data) => {
             res.json(data);
-            console.log(data);
         })
         .catch((err) => {
             alert(err);
