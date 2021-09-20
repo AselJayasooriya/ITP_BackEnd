@@ -15,5 +15,6 @@ db.employees = require("./employeeDetails.model")(mongoose);
 db.tests = require("./tests.model.js")(mongoose);
 db.channell = require("./echannelling.model")(mongoose);
 db.inquiry = require("./postInquiry.model")(mongoose);
-
+db.mobilepayments = require("./mobilePayments.model")(mongoose);
+db.refunds=require("./refunds.model")(mongoose);
 module.exports = db;

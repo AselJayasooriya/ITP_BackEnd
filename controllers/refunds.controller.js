@@ -1,46 +1,19 @@
 const e = require("express");
 const db = require("../models");
-const nodemailer = require("nodemailer");
-const Credit = db.creditCardPayments;
+const Refund = db.refunds;
 
 // Create and Save a new creditCard
 
 exports.create = (req, res) => {
-  // console.log(req.body);
+  console.log(req.body);
 
-  const transporter = nodemailer.createTransport({
-    service: "hotmail",
-    auth: {
-      user: "ispirithalei@outlook.com",
-      pass: "@waCamDa!69",
-    },
+  const refund = new Refund({
+    paymentid: req.body.paymentid,
+    paragraph: req.body.paragraph,
+  
   });
-
-  const options = {
-    from: "ispirithalei@outlook.com",
-    to: req.body.email,
-    subject: "E-Bill",
-    text: "Dear " + req.body.name + ",",
-    html: "<h1>Payment Successful</h1>",
-  };
-
-  transporter.sendMail(options, function (err, info) {
-    if (err) {
-      console.log(err);
-      return;
-    }
-    console.log("sent: " + info.response);
-  });
-
-  const credit = new Credit({
-    payment_id: req.body.paymentid,
-    name: req.body.name,
-    email: req.body.email,
-    date: req.body.date,
-    amount: req.body.amount,
-  });
-  credit
-    .save(credit)
+  refund
+    .save(refund)
     .then((data) => {
       // console.log(data);
       res.send(data);
@@ -55,7 +28,7 @@ exports.create = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-  Credit.find()
+  Refund.find()
     .then((data) => {
       res.json(data);
       // console.log(data);
@@ -68,7 +41,7 @@ exports.findAll = (req, res) => {
 // Retrieve all Sessions with matching Payment ID from the database.
 exports.findAllByDPaymentID = (req, res) => {
   const paymentID = req.params.id;
-  // console.log(req.params);
+  console.log(req.params);
   Credit.find({ _id: paymentID })
     .then((data) => {
       res.send("retruned with id" + data);

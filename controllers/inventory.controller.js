@@ -3,8 +3,6 @@ const Inventory = db.inventory;
 
 // Create and Save a new Inventory item
 exports.create = (req, res) => {
-    console.log(req.body);
-
     const inventory = new Inventory({
         item_id: req.body.item_id,
         item_name: req.body.item_name,
@@ -35,7 +33,6 @@ exports.getAll = (req, res) => {
     Inventory.find()
         .then((data) => {
             res.json(data);
-            console.log(data);
         })
         .catch((err) => {
             alert(err);
@@ -89,6 +86,22 @@ exports.delete = (req, res) => {
                 message: "Could not delete Inventory with id=" + id
             });
         });
+};
+
+//Retrieve a single inventory item by id
+exports.findOne = (req,res) => {
+    const id = req.params.id;
+
+    Inventory.findById(id)
+    .then((data) => {
+        if (!data)
+            res.status(404).send({ message: "Not found Ineventory with id " + id });
+        else 
+            res.send(data);
+    })
+    .catch((err) => {
+        res.status(500).send({ message: "Error retrieving Inventory with id=" + id });
+      });
 };
 
 

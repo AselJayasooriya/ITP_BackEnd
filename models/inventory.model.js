@@ -10,7 +10,9 @@ module.exports = mongoose => {
                 supplier_contact: {type:String,required:true},
                 purchase_price: Number,
                 registered_date: String,
-                type_medicine: String
+                type_medicine: String,
+                quantity:String,
+                reorder_level:String
             },
             { timestamps: true }
         )

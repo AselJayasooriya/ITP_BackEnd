@@ -1,6 +1,6 @@
 module.exports = mongoose => {
     const Session = mongoose.model(
-        "session",
+        "Session",
         mongoose.Schema(
             {
                 doctor_id: String,

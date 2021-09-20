@@ -15,5 +15,8 @@ module.exports = app => {
     // Update a Tutorial with id
     router.put("/:id", inventories.update);
 
+    //find single inventory by id
+    router.get("/:id", inventories.findOne);
+
     app.use('/api/inventories',router);
 }

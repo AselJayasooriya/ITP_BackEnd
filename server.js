@@ -39,7 +39,6 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to ispirithalei." });
 });
 
-
 require("./routes/doctorSession.routes")(app);
 require("./routes/doctorNote.routes")(app);
 require("./routes/doctorPrescription.routes")(app);
@@ -49,7 +48,10 @@ require("./routes/creditCard.routes")(app);
 require("./routes/inventory.routes")(app);
 require("./routes/echannelling.routes")(app);
 require("./routes/postInquiry.routes")(app);
-require('./routes/auth.routes')(app);
+require("./routes/auth.routes")(app);
+require("./routes/mobileDetails.routes")(app);
+require("./routes/refunds.route")(app);
+
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
