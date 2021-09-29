@@ -1,20 +1,19 @@
 module.exports = mongoose => {
     const MdRequest = mongoose.model(
-        "",
+        "mdrequest",
         mongoose.Schema(
             {
                drugid:{
-                   type:Number,
-                   required: true
-                },
+               type:String,
+               required:true
+            },
                medicinename:{
                    type:String,
-                   required: true
-                },
+                   required:true},
+
                 mqty:{
-                    type:Number,
-                    required: true
-                 }
+                    type:String,
+                    required:true},
             },
             { timestamps: true }
         )

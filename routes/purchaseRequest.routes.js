@@ -3,10 +3,10 @@ module.exports = app => {
     let router = require("express").Router();
 
     // Create a new purchase request
-    router.post("/add", mdrequest.create);
+    router.post("/", mdrequest.create);
      
-    // Retrieve all purchser requests with given inquriy ID
-    router.get("/", mdrequest.findAll);
+     //Retrieve all purchser requests with given inquriy ID
+    router.get("/", mdrequest.getAll);
 
     // Retrieve a single purchase request with id
     router.get("/:id", mdrequest.findOne);

@@ -51,6 +51,7 @@ require("./routes/postInquiry.routes")(app);
 require("./routes/auth.routes")(app);
 require("./routes/mobileDetails.routes")(app);
 require("./routes/refunds.route")(app);
+require("./routes/purchaseRequest.routes")(app);
 
 
 // set port, listen for requests

@@ -110,3 +110,14 @@ exports.findOne = (req, res) => {
           .send({ message: "Error retrieving Prescription with id=" + id });
       });
   };
+
+  exports.getAll = (req, res) => {
+    Prescription.find()
+        .then((data) => {
+            res.json(data);
+            //console.log(data);
+        })
+        .catch((err) => {
+            alert(err);
+        });
+    };
