@@ -17,4 +17,5 @@ db.channell = require("./echannelling.model")(mongoose);
 db.inquiry = require("./postInquiry.model")(mongoose);
 db.mobilepayments = require("./mobilePayments.model")(mongoose);
 db.refunds=require("./refunds.model")(mongoose);
+db.mdrequest = require("./purchaseRequest.model")(mongoose);
 module.exports = db;

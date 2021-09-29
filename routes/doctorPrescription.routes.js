@@ -18,5 +18,8 @@ module.exports = app => {
     // Retrieve a single Prescription with id
     router.get("/edit/:id", prescriptions.findOne);
 
+    // Retrieve all prescriptions
+    router.get("/",prescriptions.getAll);
+
     app.use('/api/prescriptions', router);
 };
