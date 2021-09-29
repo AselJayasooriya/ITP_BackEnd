@@ -2,7 +2,7 @@ const db = require("../models");
 const MdRequest = db.mdrequest;
 
 
-// Create and Save a new Inquiry
+// Create and Save a new Purchase request
 
 exports.create = (req, res) => {
   //console.log(req.body);
@@ -39,22 +39,23 @@ exports.getAll = (req, res) => {
       });
 };
 
-//Retrieve a single inventory item by id
+//Retrieve a single request by id
 exports.findOne = (req,res) => {
     const id = req.params.id;
 
     MdRequest.findById(id)
     .then((data) => {
         if (!data)
-            res.status(404).send({ message: "Not found Ineventory with id " + id });
+            res.status(404).send({ message: "Not found Request with id " + id });
         else 
             res.send(data);
     })
     .catch((err) => {
-        res.status(500).send({ message: "Error retrieving Inventory with id=" + id });
+        res.status(500).send({ message: "Error retrieving Request with id=" + id });
       });
 };
 
+//update request
 exports.update = (req, res) => {
     if (!req.body) {
         return res.status(400).send({
@@ -68,18 +69,18 @@ exports.update = (req, res) => {
         .then(data => {
             if (!data) {
                 res.status(404).send({
-                    message: `Cannot update Inventory with id=${id}. Maybe Inventory was not found!`
+                    message: `Cannot update Request with id=${id}. Maybe Request was not found!`
                 });
-            } else res.send({ message: "Inventory was updated successfully." });
+            } else res.send({ message: "Purchase Request was updated successfully." });
         })
         .catch(err => {
             res.status(500).send({
-                message: "Error updating Inventory with id=" + id
+                message: "Error updating Request with id=" + id
             });
         });
 };
 
-
+//delete request
 exports.delete = (req, res) => {
     const id = req.params.id;
 
@@ -87,17 +88,17 @@ exports.delete = (req, res) => {
         .then(data => {
             if (!data) {
                 res.status(404).send({
-                    message: `Cannot delete Tests with id=${id}. Maybe Test was not found!`
+                    message: `Cannot delete Request with id=${id}. Maybe Request was not found!`
                 });
             } else {
                 res.send({
-                    message: "Test was deleted successfully!"
+                    message: "Request was deleted successfully!"
                 });
             }
         })
         .catch(err => {
             res.status(500).send({
-                message: "Could not delete Test with id=" + id
+                message: "Could not delete Request with id=" + id
             });
         });
 };
