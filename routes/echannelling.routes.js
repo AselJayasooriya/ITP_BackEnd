@@ -14,6 +14,9 @@ module.exports = app => {
 
     // Retrieve all channelling appointments
     router.get("/all/", channell.findAll);
+    
+    // Retrieve all channelling appointments by search query
+    router.get("/search/:query/:status", channell.searchByQuery);
 
     // Retrieve all channelling with given chanell ID
     router.get("/count/", channell.getCount);
