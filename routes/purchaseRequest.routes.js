@@ -17,6 +17,9 @@ module.exports = app => {
     // Delete a purchase request with id
     router.delete("/:id", mdrequest.delete);
 
+    //retrieve all request with seacrh query
+    router.get("/search/:query",mdrequest.searchByQuery);
+
  
     app.use('/api/mdrequest', router);
 };
