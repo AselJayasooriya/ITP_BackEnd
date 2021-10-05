@@ -109,7 +109,7 @@ exports.delete = (req, res) => {
       res.status(200).send({ status: "user deleted" });
     })
     .catch((e) => {
-      // console.log(e);
+      console.log(e);
       res.status(400).send({ status: "error in delete operation" });
     });
 };
