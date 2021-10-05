@@ -1,3 +1,3 @@
 module.exports = {
-  url: process.env.MONGODB_URL,
+  url: "mongodb+srv://ispirithalei:wacyamda@ispirithaleidb.nbswy.mongodb.net/ispirithaleitestDB",
 };

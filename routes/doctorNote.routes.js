@@ -9,6 +9,9 @@ module.exports = app => {
     // Get all the posted notes by doctors
     router.get("/", notes.getAll);
 
+    //retrieve all notes with seacrh query
+    router.get("/search/:query",notes.searchByQuery);
+
     app.use('/api/notes', router);
 
 };
