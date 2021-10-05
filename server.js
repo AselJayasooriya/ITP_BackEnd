@@ -36,7 +36,7 @@ db.mongoose
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to ispirithalei." });
+  res.json({ message: process.env.MONGODB_URL });
 });
 
 require("./routes/doctorSession.routes")(app);
