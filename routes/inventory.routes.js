@@ -18,5 +18,8 @@ module.exports = app => {
     //find single inventory by id
     router.get("/:id", inventories.findOne);
 
+    //retrieve all inventory items with seacrh query
+    router.get("/search/:query",inventories.searchByQuery);
+
     app.use('/api/inventories',router);
 }

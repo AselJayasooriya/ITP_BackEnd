@@ -21,5 +21,8 @@ module.exports = app => {
     // Retrieve all prescriptions
     router.get("/",prescriptions.getAll);
 
+    // Retrieve all prescriptions by searched name
+    router.get("/search/:name/:id", prescriptions.searchByName);
+
     app.use('/api/prescriptions', router);
 };

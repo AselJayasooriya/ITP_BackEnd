@@ -104,5 +104,17 @@ exports.findOne = (req,res) => {
       });
 };
 
+//retrieve all inventory items with seacrh query
+exports.searchByQuery = (req, res) => {
+    const query = req.params.query;
+    
+    Inventory.find({supplier_name: {'$regex': query, '$options': 'i'}})
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send("Some error occurred while retrieving information.");
+        });
+};
 
 

@@ -69,9 +69,9 @@ exports.findAll = (req, res) => {
 exports.findAllByDPaymentID = (req, res) => {
   const paymentID = req.params.id;
   // console.log(req.params);
-  Credit.find({ _id: paymentID })
+  Credit.find({ payment_id: paymentID })
     .then((data) => {
-      res.send("retruned with id" + data);
+      res.send(data);
       // console.log(data);
     })
     .catch((err) => {
@@ -109,7 +109,7 @@ exports.delete = (req, res) => {
       res.status(200).send({ status: "user deleted" });
     })
     .catch((e) => {
-      // console.log(e);
+      console.log(e);
       res.status(400).send({ status: "error in delete operation" });
     });
 };

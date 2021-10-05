@@ -97,21 +97,21 @@ exports.delete = (req, res) => {
 //Find prescription according to given ID
 exports.findOne = (req, res) => {
     const id = req.params.id;
-  
-    Prescription.findById(id)
-      .then(data => {
-        if (!data)
-          res.status(404).send({ message: "Not found Prescription with id " + id });
-        else res.send(data);
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .send({ message: "Error retrieving Prescription with id=" + id });
-      });
-  };
 
-  exports.getAll = (req, res) => {
+    Prescription.findById(id)
+        .then(data => {
+            if (!data)
+                res.status(404).send({ message: "Not found Prescription with id " + id });
+            else res.send(data);
+        })
+        .catch(err => {
+            res
+                .status(500)
+                .send({ message: "Error retrieving Prescription with id=" + id });
+        });
+};
+
+exports.getAll = (req, res) => {
     Prescription.find()
         .then((data) => {
             res.json(data);
@@ -120,4 +120,21 @@ exports.findOne = (req, res) => {
         .catch((err) => {
             alert(err);
         });
-    };
+};
+
+// Retrieve all prescriptions by search
+exports.searchByName = (req, res) => {
+    const name = req.params.name;
+    const wantedID = req.params.id;
+    
+    Prescription.find({
+        dId: wantedID,
+        dPName: { '$regex': name, '$options': 'i' }
+    })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send("Some error occurred while retrieving prescriptions.");
+        });
+};
