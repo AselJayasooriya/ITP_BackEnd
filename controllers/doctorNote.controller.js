@@ -36,3 +36,19 @@ exports.getAll = (req, res) => {
             alert(err);
         });
 };
+
+//retrieve all notes with seacrh query
+exports.searchByQuery = (req, res) => {
+    const query = req.params.query;
+
+    Note.find({
+        //pNoteName: { '$regex': query, '$options': 'i' }
+        $or: [{pNoteId: {'$regex': query, '$options': 'i'}}, {pNoteName: {'$regex': query, '$options': 'i'}}]
+    })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send("Some error occurred while retrieving notes.");
+        });
+};

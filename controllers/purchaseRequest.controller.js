@@ -102,3 +102,16 @@ exports.delete = (req, res) => {
             });
         });
 };
+
+//retrieve all Requests with seacrh query
+exports.searchByQuery = (req, res) => {
+    const query = req.params.query;
+    
+    MdRequest.find({medicinename: {'$regex': query, '$options': 'i'}})
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send("Some error occurred while retrieving information.");
+        });
+};

@@ -58,6 +58,19 @@ exports.findAll = (req, res) => {
       });
   };
 
+//retrieve all Inquiry with seacrh query
+exports.searchByQuery = (req, res) => {
+    const query = req.params.query;
+    
+    Inquiry.find({title: {'$regex': query, '$options': 'i'}})
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send("Some error occurred while retrieving information.");
+        });
+};
+
 
 
 

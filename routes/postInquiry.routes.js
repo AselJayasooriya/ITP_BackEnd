@@ -17,6 +17,8 @@ module.exports = app => {
     // Delete a inquriy with id
     router.delete("/:id", inquiry.delete);
 
+    //retrieve all inquiries with seacrh query
+    router.get("/search/:query",inquiry.searchByQuery);
  
     app.use('/api/inquiry', router);
 };
