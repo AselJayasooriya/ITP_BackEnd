@@ -22,3 +22,4 @@ module.exports = (app) => {
   app.use("/api/payments", router);
 };
 // http://localhost:8080/api/payments/create
+//http://localhost:8080/api/payments/CPAY4736
