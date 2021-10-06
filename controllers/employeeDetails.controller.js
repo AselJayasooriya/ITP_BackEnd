@@ -10,13 +10,13 @@ exports.create = (req, res) => {
   const transporter = nodemailer.createTransport({
     service: "hotmail",
     auth: {
-      user: "ispirithalei@outlook.com",
+      user: "ispirithaleii@outlook.com",
       pass: "@waCamDa!69",
     },
   });
 
   const options = {
-    from: "ispirithalei@outlook.com",
+    from: "ispirithaleii@outlook.com",
     to: req.body.email,
     subject: "Login Credentials",
     text: "Username: " + req.body.email + "\nPassword: " + req.body.password,
