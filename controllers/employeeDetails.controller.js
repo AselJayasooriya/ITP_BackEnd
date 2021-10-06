@@ -10,13 +10,13 @@ exports.create = (req, res) => {
   const transporter = nodemailer.createTransport({
     service: "hotmail",
     auth: {
-      user: "ispirithaleii@outlook.com",
+      user: "ispirithale@outlook.com",
       pass: "@waCamDa!69",
     },
   });
 
   const options = {
-    from: "ispirithaleii@outlook.com",
+    from: "ispirithale@outlook.com",
     to: req.body.email,
     subject: "Login Credentials",
     text: "Username: " + req.body.email + "\nPassword: " + req.body.password,
@@ -26,13 +26,11 @@ exports.create = (req, res) => {
     if (err) {
       console.log(err);
       return;
+    }else{
+      console.log("sent: " + info.response);
     }
   });
 
-  //validate request
-  if (req.body) {
-    res.status(400).send({ message: "content can not be empty" });
-  }
 
   const empform = new EmpDetails({
     role: req.body.role,
