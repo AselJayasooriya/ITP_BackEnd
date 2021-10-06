@@ -17,9 +17,13 @@ exports.create = (req, res) => {
             res.send(data);
         })
         .catch(err => {
-            res.status(500).send({
-                message: err.message || "Error occured while creating your session please try again."
-            });
+            if (err.name === 'MongoError' && err.code === 11000) {
+                // Duplicate session
+                return res.status(422).send({ succes: false, message: 'Session already exist!' });
+            }
+
+            // Some other error
+            return res.status(500).send(err);
         });
 
 
