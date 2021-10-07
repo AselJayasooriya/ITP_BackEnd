@@ -11,13 +11,13 @@ exports.create = (req, res) => {
     const transporter = nodemailer.createTransport({
         service: "hotmail",
         auth: {
-            user: "ispirithalei@outlook.com",
+            user: "ispirithale@outlook.com",
             pass: "@waCamDa!69",
         },
     });
 
     const options = {
-        from: "ispirithalei@outlook.com",
+        from: "ispirithale@outlook.com",
         to: req.body.email,
         subject: "Echanelling Confrimation {ISPIRITHALEI}",
         text: "Entered Fullname: " + req.body.fullname + "\nEntered NIC: " + req.body.nic + "\nEntered Mobile :" + req.body.mobile + "\nEntered Age:" + req.body.age,
